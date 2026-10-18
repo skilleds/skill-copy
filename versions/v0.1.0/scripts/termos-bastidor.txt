@@ -1,0 +1,45 @@
+# Termos de estratégia interna que NUNCA aparecem na copy (piso nº 1: firewall do briefing).
+# Um termo por linha, em português, com ou sem acento, maiúscula ou minúscula (o gate normaliza).
+# Casa por palavra inteira ("persona" não casa "personalizado"). Para estender, acrescente uma linha.
+# Prefixo "re:" = expressão regular ERE sobre o texto normalizado (minúsculo, sem acento).
+plano de negocios
+plano de negocio
+modelo de negocio
+ticket medio
+ticket mais alto
+ticket mais baixo
+posicionamento
+publico-alvo
+publico alvo
+persona
+personas
+nossos concorrentes
+nossa concorrencia
+mais caro que
+mais caros que
+mais caro do que
+mais caros do que
+margem
+margens
+proposta de valor
+diferencial competitivo
+funil
+funis
+lead
+leads
+conversao
+conversoes
+ltv
+cac
+b2b
+b2c
+nicho
+nichos
+estrategia de preco
+segmento premium
+somos premium
+marca premium
+concorrentes
+concorrente
+concorrencia
+que a concorrencia

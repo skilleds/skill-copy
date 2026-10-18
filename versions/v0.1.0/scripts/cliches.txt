@@ -1,0 +1,37 @@
+# Clichês de copy de IA e de marketing genérico. Reprovam o gate.
+# Um por linha; acento e caixa não importam. Casa por palavra inteira.
+# Prefixo "re:" = expressão regular ERE sobre o texto normalizado (minúsculo, sem acento).
+revolucionario
+revolucionaria
+revolucionarios
+revolucionarias
+solucao completa
+solucoes completas
+no mundo de hoje
+no mundo atual
+eleve
+eleve seu
+desbloqueie
+potencialize
+de ponta
+inovador
+inovadora
+inovadores
+inovadoras
+jornada
+transforme sua vida
+transforme seu negocio
+leve seu negocio ao proximo nivel
+ao proximo nivel
+game changer
+alavanque
+otimize sua
+melhor do mercado
+resultados incriveis
+qualidade incomparavel
+experiencia unica
+mergulhe
+descubra o poder
+re:\bnao e (apenas|so|somente|simplesmente) [^.,;!?]{1,40}, e\b
+re:\bnao se trata (apenas|so|somente) de [^.,;!?]{1,40}, (mas|e)\b
+re:\b(rapid[oa]|facil|simples|seguro|segura|completo|completa|moderno|moderna|eficiente|intuitivo|intuitiva|poderoso|poderosa|flexivel|robusto|robusta|escalavel|inteligente|pratico|pratica)s?, (rapid[oa]|facil|simples|seguro|segura|completo|completa|moderno|moderna|eficiente|intuitivo|intuitiva|poderoso|poderosa|flexivel|robusto|robusta|escalavel|inteligente|pratico|pratica)s? e (rapid[oa]|facil|simples|seguro|segura|completo|completa|moderno|moderna|eficiente|intuitivo|intuitiva|poderoso|poderosa|flexivel|robusto|robusta|escalavel|inteligente|pratico|pratica)s?\b

@@ -1,0 +1,12 @@
+slug = "copy"
+name = "schematize-copy"
+tag = "Copy · conversão"
+status = "beta"
+order = 52
+current_version = "0.1.0"
+href = "/copy"
+
+[descriptions]
+pt = "Copy de conversão para landing page, anúncio, e-mail de venda, página de preço e CTA. O briefing do negócio é insumo, nunca texto: cada fato interno é traduzido no que o cliente percebe e como provar. Um gate executável barra vazamento de estratégia, eco do briefing, clichê de IA e copy que fala só de si."
+en = "Conversion copy for landing pages, ads, sales emails, pricing pages and CTAs. The business brief is input, never text: every internal fact is translated into what the customer perceives and how to prove it. An executable gate blocks strategy leaks, brief echoes, AI cliches and copy that only talks about itself."
+es = "Copy de conversión para landing pages, anuncios, correos de venta, páginas de precio y CTA. El briefing del negocio es insumo, nunca texto: cada hecho interno se traduce en lo que el cliente percibe y cómo probarlo. Un gate ejecutable bloquea fugas de estrategia, ecos del briefing, clichés de IA y copy que solo habla de sí misma."
