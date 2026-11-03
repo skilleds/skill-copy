@@ -11,30 +11,14 @@ ticket mais baixo
 posicionamento
 publico-alvo
 publico alvo
-persona
-personas
 nossos concorrentes
 nossa concorrencia
 mais caro que
 mais caros que
 mais caro do que
 mais caros do que
-margem
-margens
 proposta de valor
 diferencial competitivo
-funil
-funis
-lead
-leads
-conversao
-conversoes
-ltv
-cac
-b2b
-b2c
-nicho
-nichos
 estrategia de preco
 segmento premium
 somos premium
@@ -43,3 +27,9 @@ concorrentes
 concorrente
 concorrencia
 que a concorrencia
+# Posicionamento de preço/marca dito em voz de bastidor (paráfrase do incidente Asender)
+re:\bacima da media\b
+re:\bpreco (fica )?(alto|elevado|acima)\b
+re:\bopcao premium\b
+re:\bsomos (a |o )?(mais|menos) (caro|cara|barato|barata)s?\b
+re:\bpreco (mais )?(alto|elevado) (que|do que)\b

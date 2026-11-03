@@ -9,6 +9,9 @@
 #   eco       5+ palavras seguidas do briefing reaparecem na copy (com --briefing)  -> ERRO
 #   cliche    clichê de IA (scripts/cliches.txt)                                    -> ERRO
 #   razao     ocorrências de "nós/nosso/somos/a gente" maiores que as de "você/seu" -> ERRO
+#   contexto  termo contextual (funil, lead, margem...) no briefing e na copy -> ERRO; fora do briefing -> AVISO (--permitir <termo> libera)
+#   travessao/emoji  travessão ou emoji na copy de usuário final               -> AVISO
+#   email     --email: copy de e-mail sem {{unsubscribe}}                      -> AVISO
 #   prova     marcador [PROVA: ...] ainda aberto                                    -> AVISO
 # Entrada: $1 = copy (.md/.txt) · --briefing <arquivo> opcional.
 # Saída: `arquivo:linha: [ERRO|AVISO regra] mensagem`; exit 0 passa (avisos não reprovam) ·
@@ -18,7 +21,7 @@ export LC_ALL=C
 
 AQUI="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-uso() { echo "uso: check-copy.sh <copy.md|txt> [--briefing <briefing.md>]" >&2; }
+uso() { echo "uso: check-copy.sh <copy.md|txt> [--briefing <briefing.md>] [--permitir <termo>]... [--email]" >&2; }
 
 # O que: minúsculo + sem acento, linha a linha (a numeração de linha da entrada é preservada).
 # Alternação em vez de colchete: em locale C o colchete quebraria o UTF-8 byte a byte.
@@ -50,10 +53,12 @@ construir_padroes() {
   done
 }
 
-ARQ=""; BRIEFING=""
+ARQ=""; BRIEFING=""; PERMITIDOS=""; EMAIL=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --briefing) [ $# -ge 2 ] || { uso; exit 2; }; BRIEFING="$2"; shift 2 ;;
+    --permitir) [ $# -ge 2 ] || { uso; exit 2; }; PERMITIDOS="$PERMITIDOS|$(printf '%s' "$2" | norm)"; shift 2 ;;
+    --email) EMAIL=1; shift ;;
     -h|--help) uso; exit 2 ;;
     -*) echo "check-copy: opção desconhecida: $1" >&2; uso; exit 2 ;;
     *) [ -z "$ARQ" ] || { uso; exit 2; }; ARQ="$1"; shift ;;
@@ -90,9 +95,29 @@ while IFS=: read -r ln termo; do
   achado ERRO bastidor "$ln" "termo de estratégia interna na copy: \"$termo\" (o briefing é insumo, nunca texto; traduza para o que o cliente percebe)"
 done < <(grep -noE -f "$TMP/bastidor.pat" "$TMP/copy.n" || true)
 
+# 1b. Termos contextuais: vocabulário do produto só reprova se veio do briefing (ou é aviso)
+if [ -n "$BRIEFING" ]; then norm < "$BRIEFING" > "$TMP/briefing.n"; else : > "$TMP/briefing.n"; fi
+while IFS= read -r termo; do
+  case "$termo" in ''|'#'*) continue ;; esac
+  case "|${PERMITIDOS}|" in *"|$termo|"*) continue ;; esac
+  while IFS=: read -r ln _; do
+    if grep -qE "\\b$termo\\b" "$TMP/briefing.n"; then
+      achado ERRO contexto "$ln" "termo de bastidor \"$termo\" veio do briefing e está na copy (se é vocabulário do produto, libere com --permitir $termo)"
+    else
+      achado AVISO contexto "$ln" "\"$termo\" na copy: confirme que é vocabulário do produto/cliente, não bastidor"
+    fi
+  done < <(grep -noE "\\b$termo\\b" "$TMP/copy.n" || true)
+done < <(norm < "$AQUI/termos-contextuais.txt")
+
 # 2. Eco do briefing: 5+ palavras seguidas
 if [ -n "$BRIEFING" ]; then
-  norm < "$BRIEFING" > "$TMP/briefing.n"
+  # trechos entre <!-- fato --> e <!-- /fato --> (razão social, endereço, CNPJ, preço) não contam como eco
+  awk '{ l = $0; out = ""
+    while (1) {
+      if (inf) { p = index(l, "<!-- /fato -->"); if (p) { l = substr(l, p + 14); inf = 0 } else { l = ""; break } }
+      else { p = index(l, "<!-- fato -->"); if (p) { out = out substr(l, 1, p - 1) " "; l = substr(l, p + 13); inf = 1 } else { out = out l; break } }
+    }
+    print out }' "$TMP/copy.n" > "$TMP/copy.eco"
   while IFS=: read -r ln trecho; do
     achado ERRO eco-briefing "$ln" "trecho do briefing repetido na copy (5+ palavras seguidas): \"$trecho\""
   done < <(awk '
@@ -111,7 +136,7 @@ if [ -n "$BRIEFING" ]; then
           i = e + 1
         } else i++
       }
-    }' "$TMP/briefing.n" "$TMP/copy.n")
+    }' "$TMP/briefing.n" "$TMP/copy.eco")
 fi
 
 # 3. Clichê de IA
@@ -132,6 +157,19 @@ contagem="$(awk '
 nos="${contagem% *}"; voce="${contagem#* }"
 if [ "$nos" -gt "$voce" ]; then
   achado ERRO razao-nos-voce 0 "a copy fala de si: $nos ocorrência(s) de nós/nosso/somos/a gente contra $voce de você/seu/sua (o leitor é o cliente)"
+fi
+
+# 4b. Travessão e emoji (copy é texto de usuário final: piso da casa)
+while IFS=: read -r ln _; do
+  achado AVISO travessao "$ln" "travessão na copy de usuário final (use vírgula, ponto ou dois-pontos)"
+done < <(grep -nP '\xE2\x80[\x93\x94]' "$ARQ" || true)
+while IFS=: read -r ln _; do
+  achado AVISO emoji "$ln" "emoji na copy (nunca emoji na estrutura do site; use ícone SVG)"
+done < <(grep -nP '\xF0\x9F|\xE2\x9C[\x80-\xBF]|\xE2\x9D[\x80-\xBF]|\xE2\xAD|\xE2\x9A[\xA0-\xBF]' "$ARQ" || true)
+
+# 4c. E-mail de venda: descadastro obrigatório
+if [ "$EMAIL" = 1 ] && ! grep -qiE '\{\{ *unsubscribe *\}\}|descadastr|cancelar inscri' "$ARQ"; then
+  achado AVISO email 0 "e-mail sem descadastro de um clique ({{unsubscribe}}); ver references/email-venda.md"
 fi
 
 # 5. Prova pendente

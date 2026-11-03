@@ -23,6 +23,7 @@ caso() {
   echo "  ok    $nome"; ok=$((ok + 1))
 }
 
+printf 'Endereço: Rua das Flores, 120, sala 4, Centro, de segunda a sexta.\n' > "$TMP/briefing-fato.md"
 BRIEFING="$TMP/briefing.md"
 cat > "$BRIEFING" <<'B'
 O plano de negócios da Asender é ticket mais alto que os concorrentes, foco premium.
@@ -48,11 +49,22 @@ caso bastidor-concorrentes 1 "concorrentes" <<<"Você leva um produto melhor que
 caso bastidor-concorrencia 1 "concorrencia" <<<"Você paga menos que a concorrência."
 caso bastidor-linha 1 ":3:" <<<$'Você escolhe o dia.\n\nNosso posicionamento é claro e você sente a diferença.'
 caso bastidor-maiuscula-acento 1 "ticket medio" <<<"VOCÊ paga o TICKET MÉDIO do setor e leva mais."
-caso bastidor-jargao 1 "funil" <<<"Você entra no nosso funil de vendas e recebe uma proposta."
+BRIEF_FUNIL="$TMP/briefing-funil.md"; echo "Aumentar o funil de vendas e a margem do ticket." > "$BRIEF_FUNIL"
+caso bastidor-jargao-do-briefing 1 "funil" --briefing "$BRIEF_FUNIL" <<<"Você entra no nosso funil de vendas e recebe uma proposta."
+caso contextual-sem-briefing-e-aviso 0 "AVISO contexto" <<<"Sua equipe B2B gerencia o funil de leads da plataforma. Você acompanha tudo."
+caso contextual-permitir-libera 0 "0 erro(s)" --briefing "$BRIEF_FUNIL" --permitir funil <<<"Você acompanha o funil de vendas da sua equipe em tempo real."
+caso parafrase-preco-asender 1 "bastidor" <<<"Você escolhe a opção premium: o preço fica acima da média do setor porque cuidamos de tudo."
 
 echo "== eco do briefing =="
 caso eco-briefing 1 "eco-briefing" --briefing "$BRIEFING" <<<"Você, que quer atingir donos de pequenas empresas do interior, vai gostar."
 caso eco-quatro-palavras-passa 0 "0 erro(s)" --briefing "$BRIEFING" <<<"Você atinge donos de pequenas empresas com facilidade, no seu ritmo."
+
+caso fato-marcado-nao-e-eco 0 "0 erro(s)" --briefing "$TMP/briefing-fato.md" <<<"Você nos encontra na <!-- fato -->Rua das Flores, 120, sala 4, Centro<!-- /fato --> de segunda a sexta."
+echo "== travessão, emoji, e-mail =="
+caso travessao-aviso 0 "AVISO travessao" <<<"Você recebe tudo — no prazo combinado."
+caso emoji-aviso 0 "AVISO emoji" <<<"Você começa hoje 🚀 e recebe no prazo."
+caso email-sem-descadastro 0 "AVISO email" --email <<<"Você recebe a oferta do mês no seu e-mail."
+caso email-com-descadastro 0 "0 aviso(s)" --email <<<$'Você recebe a oferta do mês.\n{{unsubscribe}}'
 
 echo "== clichê de IA =="
 caso cliche-revolucionario 1 "cliche" <<<"Você conhece a solução revolucionária que muda o seu dia."

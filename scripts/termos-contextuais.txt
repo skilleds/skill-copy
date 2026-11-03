@@ -1,0 +1,19 @@
+# Termos de vocabulário de negócio que SÃO legítimos quando o produto é deles (CRM, martech, financeiro).
+# Regra: ERRO se o termo aparece no briefing (--briefing) e na copy e não foi liberado com --permitir <termo>;
+# sem briefing ou fora dele, é só AVISO. Um termo por linha, sem acento, palavra inteira.
+persona
+personas
+margem
+margens
+funil
+funis
+lead
+leads
+conversao
+conversoes
+ltv
+cac
+b2b
+b2c
+nicho
+nichos

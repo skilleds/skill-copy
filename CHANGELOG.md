@@ -3,6 +3,11 @@
 Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 com versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não lançado]
+### Corrigido
+- Gate: termos contextuais (funil, lead, margem, B2B...) saem da lista absoluta (erro só se vieram do briefing; `--permitir`); padrões de posicionamento de preço (paráfrase Asender); marcador `<!-- fato -->` isento do eco; avisos de travessão, emoji e `--email` sem descadastro; `references/email-venda.md`.
+- Herda os pisos 22–29 da engineering.
+
 ## [0.1.0] — 2026-10-18
 Primeira versão. Nasce de um incidente real: o usuário contou ao Claude que o plano de negócios da marca Asender era "ticket mais alto que os concorrentes, foco premium", e a copy da landing page saiu escrevendo textualmente "somos premium, mais caros que a concorrência". É o defeito clássico de LLM em copy: o texto **fala para dentro**, descreve o plano de negócios e a estratégia em vez do que o cliente precisa ler para comprar. Nenhuma skill do catálogo cobria copy de conversão (a `schematize-seo-writing` cobre artigo para ranquear), e regra de copy só em prosa vira "lembre-se de"; aqui o piso é executável.
 

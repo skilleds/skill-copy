@@ -26,7 +26,10 @@ aprovação**: arquivo vazio, inexistente ou briefing vazio).
 | Regra | O que reprova | Nível |
 |---|---|---|
 | `bastidor` | Termo de estratégia interna na copy (`scripts/termos-bastidor.txt`: "plano de negócios", "ticket mais alto", "posicionamento", "persona", "funil", "lead", "B2B", "somos premium"...). Sem acento ou caixa; palavra inteira. | ERRO |
-| `eco-briefing` | 5 ou mais palavras seguidas do briefing (normalizadas) aparecem na copy. Só com `--briefing`. | ERRO |
+| `contexto` | Termo contextual (`scripts/termos-contextuais.txt`: funil, lead, margem, B2B...): ERRO se está no briefing e na copy; AVISO fora dele. Vocabulário legítimo do produto: `--permitir <termo>`. | ERRO/AVISO |
+| `travessao`, `emoji` | Travessão ou emoji na copy (texto de usuário final). | AVISO |
+| `email` | Com `--email`, falta `{{unsubscribe}}` (ver `email-venda.md`). | AVISO |
+| `eco-briefing` | 5 ou mais palavras seguidas do briefing (normalizadas) aparecem na copy. Só com `--briefing`. Dado factual que o dono quer na página (endereço, CNPJ, preço) vai entre `<!-- fato -->` e `<!-- /fato -->` e é ignorado pelo eco. | ERRO |
 | `cliche` | Clichê de IA (`scripts/cliches.txt`). | ERRO |
 | `razao-nos-voce` | Mais ocorrências de nós/nosso(s)/nossa(s)/somos/a gente que de você/seu(s)/sua(s). | ERRO |
 | `prova` | Marcador `[PROVA:` aberto. | AVISO |

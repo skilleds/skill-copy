@@ -82,6 +82,7 @@ Mapa de references:
 | O leitor é o cliente, estrutura de conversão, AIDA, PAS, 4U, níveis de consciência, tipos de peça | `references/leitor-e-estrutura.md` |
 | Especificidade, clichês banidos, prova nunca inventada (`[PROVA:]`), voz do cliente | `references/especificidade-prova-voz.md` |
 | Piso legal BR: CDC, CONAR, promessa, escassez falsa, preço claro | `references/legal-br.md` |
+| E-mail de venda: descadastro, remetente, base legal, piso 18 | `references/email-venda.md` |
 | Formato da entrega, regras do gate, o que o gate não cobre, como estender as listas | `references/entrega-e-gate.md` |
 
 Scripts: `scripts/check-copy.sh` (gate) com `scripts/check-copy.test.sh` (vermelhos e verdes
@@ -126,3 +127,5 @@ plantados); listas de dados em `scripts/termos-bastidor.txt` e `scripts/cliches.
 - **`schematize-design`** — o visual e a hierarquia da página; esta skill entrega o texto que o design organiza.
 - **`schematize-institutional`** — páginas legais e institucionais; copy de venda não substitui termos nem privacidade.
 - **`schematize-web`** — onde a copy vira componente e rota; esta skill entrega o texto.
+
+Herda os pisos 22–29 da `schematize-engineering` (git como trava de conclusão, deploy só do git, ops é o gate da IA, sem agents inúteis, relatório 30 min/handoff 6 h, CI remoto só antes do hml, microserviço autônomo, build em dev/hml + higiene).
