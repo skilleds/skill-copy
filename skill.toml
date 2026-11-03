@@ -3,7 +3,7 @@ name = "schematize-copy"
 tag = "Copy · conversão"
 status = "beta"
 order = 52
-current_version = "0.1.0"
+current_version = "0.2.0"
 href = "/copy"
 
 [descriptions]

@@ -1,7 +1,7 @@
 ---
 name: schematize-copy
 metadata:
-  version: 0.1.0
+  version: 0.2.0
 description: >-
   Copy de conversão para LP, anúncio, e-mail de venda e CTA, sem vazar o briefing. Use ao escrever ou revisar copy de LP, anúncio, e-mail ou CTA. Artigo SEO: schematize-seo-writing.
 ---
@@ -15,7 +15,7 @@ marca Asender tinha "ticket mais alto que os concorrentes, foco premium" e a lan
 "somos premium, mais caros que a concorrência". Aqui o briefing é **insumo, nunca texto**, e a máquina
 confere isso antes da entrega.
 
-**Versão:** skill `schematize-copy` v0.1.0. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-copy` v0.2.0. Changelog em `CHANGELOG.md`.
 
 ## Precedência e herança (leia antes de divergir)
 
