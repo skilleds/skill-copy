@@ -3,7 +3,7 @@
 Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 com versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não lançado]
+## [0.2.0] — 2026-11-03
 ### Corrigido
 - Gate: termos contextuais (funil, lead, margem, B2B...) saem da lista absoluta (erro só se vieram do briefing; `--permitir`); padrões de posicionamento de preço (paráfrase Asender); marcador `<!-- fato -->` isento do eco; avisos de travessão, emoji e `--email` sem descadastro; `references/email-venda.md`.
 - Herda os pisos 22–29 da engineering.
